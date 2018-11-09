@@ -1,0 +1,167 @@
+\subsection{The decoding process}
+We can look at the quality of the coding scheme by analyzing the performance of the decoding process under different points of view, from the finite lenght analysis of the error probability \cite{Karp2004}, to the analysis of the success probability and the overhead dimension for a small number of packets $N$ \cite{Hyytia2007}, to the opposite analysis with a high $N$ and another decoding technique \cite{Lu}.
+
+\subsubsection{Error probability for the \gls{bp} decoder}
+In \cite{Karp2004}, the authors outline a method for calculating the success probabilty of the \gls{bp} decoder. They start from defining the shape of the distribution $\Omega = (\Omega_1,\dots,\Omega_k)$, chosen on the set $\{1,\dots,k\}$, and which induces a distribution $\mathcal{D}$ on $\mathbb{F}_2^k$ we can choose our output symbols from. An LT code so described has parameters $(k,\Omega(x))$, with $x$ being the input symbol considered and $\Omega(x) = \Omega_1x+\Omega_2x^2+\dots+\Omega_kx^k$ is the generating function of the distribution. The importance of the success probability of the decoder comes from the fact that the number $n$ of encoding symbols to which we apply the \gls{bp} strictly depends on it and the output degree distribution.
+
+Later on they present a recursive approach centered on the probability distribution generating function $P_u(x,y)$.
+
+\cri{Non mi convince, non abbiamo spiegato cos'è il \gls{bp} decoder e nonn ha molto senso specificare un paper che già di per sè ha solo 1 facciata. Piuttosto concentrati meglio sugli altri}
+
+
+
+% \section{The degree distribution, a quick list}
+% Definition 3 (degree distribution): For all d, ToBeInsterted(d) is the
+% probability that an encoding symbol has degree d. \cri{Ora contestualizza le degree distr e abbrevia questo:}
+% As we now develop, the random behavior of the LT process
+% is completely determined by the degree distribution
+% ToBeInsterted(·), the number of encoding symbols K, and the number
+% of input symbols k. Our objective is to design degree distributions
+% that meet the following two design goals.
+% • As few encoding symbols as possible on average are
+% required to ensure success of the LT process. Recall
+% that the number of encoding symbols that ensure success
+% of the LT process corresponds to the number of
+% encoding symbols that ensure complete recovery of the
+% data.
+% • The average degree of the encoding symbols is as low
+% as possible. The average degree is the number of symbol
+% operations on average it takes to generate an encoding
+% symbol. The average degree timesK is the number
+% of symbol operations on average it takes to recover the
+% entire data.
+% \begin{itemize}
+%   \item all at once etc
+%   \item Ideal soliton Stretc
+%   \item Rosbust soliton
+% \end{itemize}
+% \subsection{The decoding process}
+% Definition 1 (decoder recovery rule): If there is at least
+% one encoding symbol that has exactly one neighbor then the
+% neighbor can be recovered immediately since it is a copy of
+% the encoding symbol. The value of the recovered input symbol
+% is exclusive-ored into any remaining encoding symbols
+% that also have that input symbol as a neighbor, the recovered
+% input symbol is removed as a neighbor from each of
+% these encoding symbols and the degree of each such encoding
+% symbol is decreased by one to reflect this removal. \note{as an introduction}
+%
+% \cri{For general finite length analysis}
+% In paper 9 the authors present breifly an efficient method to analyse the error probability of \gls{bp} decoder applied to this type of codes.To be specific, \cri{continua da qui}\\
+% At each point in the decoding process of an LT Code the state
+% of the decoder is described by three parameters: The number
+% u of input symbols that are still unrecovered, the number r of
+% output symbols of degree one at this point (the output ripple),
+% and the number c of output symbols whose degree at this point
+% is larger than 1 (the cloud). For fixed degree distribution,
+% number k of input symbols, and number n of collected output
+% symbols, the decoder will be in a state (c, r, u) with a certain
+% probability Pc,r,u. Let Pu(x, y) :=
+% P
+% c,r,ToBeInsterted Pc,r,uxcyr-1 be
+% the generating function of this probability distribution given
+% that exactly u input symbols are undecoded. Then we have
+% the following.
+% Theorem 1. Suppose that the original code has k input
+% symbols and that n = k(1 + ToBeInsterted) output symbols have been
+% collected for decoding. Further, denote by ToBeInsterted i, i = 1, . . . , D,
+% the probability that an output symbol is of degree i, where D
+% % is the maximum degree of an output symbol. Then we have
+% % for u = k + 1, k, . . . , 1
+% % Pu-1(x, y) =
+% % Pu
+% % `
+% % x(1 - pu) + ypu, 1
+% % u + y
+% % `
+% % 1 - 1
+% % u
+% % ´´
+% % y
+% % -
+% % Pu
+% % `
+% % x(1 - pu), 1
+% % u
+% % ´
+% % y
+% % ,
+% % where for u ≤ k,
+% % pu =
+% % 1
+% % k
+% % u - 1
+% % k
+% % XD
+% % i=1
+% % Ωiu(u - 1)
+% % »
+% % k - u
+% % i - 2
+% % –
+% % »
+% % k
+% % i
+% % –
+% % 1 -
+% % XD
+% % i=1
+% % Ωiu
+% % »
+% % k - u
+% % i - 1
+% % –
+% % »
+% % k
+% % i
+% % – -
+% % XD
+% % i=1
+% % Ωi
+% % »
+% % k - u
+% % i
+% % –
+% % »
+% % k
+% % i
+% % –
+% % ,
+% % and
+% % »
+% % a
+% % b
+% % –
+% % :=
+% % `
+% % a
+% % b
+% % ´
+% % b!, and pk+1 := Ω1. Further, Pk+1(x, y) :=
+% % xn. A proof of this theorem can be found in the final version
+% % of this paper. The theorem is the basis for an efficient computation
+% % of the error probability of the BP Decoder applied to
+% % LT Codes. A detailed analysis shows that the running time of
+% % the algorithm to calculate the error probability of the LT Decoder
+% % has a bit-complexity of O(n3 log2(n) log log(n)), where
+% % n is the number of collected output symbols of the LT Code.
+% % Under the assumption that an output symbol can choose
+% % the same input symbol more than once as its neighbor, the
+% % recursion for the state generating function can also be used to
+% % derive recursions for the expected number of output symbols
+% % of degree one at each stage. If R(u) denotes this expectation
+% % conditioned on u input symbols being undecoded, then we
+% % have
+% % R(u-1) = puC(u)+
+% % „
+% % 1 - 1
+% % u
+% % «
+% % R(u)-Pu(1, 1)+Pu
+% % „
+% % 1 - pu,
+% % 1
+% % u
+% % «
+% % .
+% % Neglecting the “drift term” 1 - Pu(1, 1) + Pu(1 - pu, 1/u) we

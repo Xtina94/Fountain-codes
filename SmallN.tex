@@ -1,0 +1,362 @@
+\subsubsection{Optimal degree distribution for small message length codes}
+Another point of view is given in \cite{Hyytia2007} where, instead of focusing on the decoder, the authors decided to approach the problem from the perspective of finding the optimal degree distribution defining the number of blocks in each packet. They do so looking at the problem in two different ways: a Markov chain approach and a combinatorial one.
+
+In the case of the Markov chain approach, from the receiver's point of view, the set of received and partially/fully decoded packets represents a state. At the same time, state transition probabilities depend on specific packets arrival probabilities, which in turn depend on the degree distribution used in the encoding process. From this it follows that the absorbing state is the one formed by the original blocks. It is worth notice that the state space needs only include the states that can not be reduced by the decoder (\textit{irreducible}), plus further reductions can be performed playing on isomorphies on block paths as well as other tricks. However, the state space implosion is unavoidable and occurs already at the lowest values of number of blocks in the message $N$.\cite{Hyytia2007}
+
+In the case of the combinatorial approach, the central observation is that in such case the orther in which the packets are received is irrelevant. The recursive algorithm that derives from it aims at calculating the probability $\mathcal{P}_N$ that a message consisting of $N$ blocks is succesfully decoded with exactly $N$ received packets. So in general we take this probability $\mathcal{P}_n = P_n(p_1,\dots,p_n)$, with the trivial cases $P_0=1$ and $P_1(p_1) = p_1$ being the seeds for recursion, and condition it on $n-m$ of the $n$ received packets having degree 1. Moreover we need to specify that having no duplicates and all the $n-m$ degree 1 packets distinct happens with probability $(n-1)!/m!n^{n-m-1}$ and this is needed to weight the remaining decoding problem, consituting the recursion, for the $m$ other packets whose degree can be lowered from being $\geq 2$ after removing the $n-m$ degree-1 packets. With these specifications, the recursiove approach can be expressed as:
+\begin{align}
+    P_n(&p_1,\dots,p_n) = \sum_{m=0}^{n-1}\binom{n}{m}p_1^{n-m}(1-p_1)^m\\
+    &\times\frac{(n-1)!}{m!n^{n-m-1}}P_m(p_1^{(n,m)},\dots,p_m^{(n,m)}),
+    \label{eq:3}
+\end{align}
+where
+\begin{equation}
+  p_j^{(n,m)} = sum_{i=2}^{n}\frac{p_i}{1-p_1}\frac{\binom{m}{j}\binom{n-m}{i-j}}{\binom{n}{i}}, \qquad j = 1,\dots,m
+  \label{eq:4}
+\end{equation}
+with the first fraction in \ref{eq:4} calculates the probability that a packet has degree $i$ conditioned on that it is not of degree 1, while the second fraction is the probability that when \"from an urn\" containing $n$ blocks, $m$ of which are white, a degree-$i$ packet is constructed, then the subsequent reduced degree is exactly $j$.
+
+
+
+
+%
+% A. LT codes
+% LT codes proposed by Luby in [5] are the first codes fully
+% realizing the digital fountain concept presented in [1]. They are
+% rateless, i.e., the rate does not need to be fixed beforehand, and
+% encoded symbols are generated on the fly [6], [7].If the degree of the packet is still higher than 1 it consists of
+% several original blocks and it is stored in a buffer. If a degree-
+% 1 packet is recovered, it is identical to an original block, i.e.,
+% a new block has been discovered. Next the newly discovered
+% block is removed from the other buffered packets including
+% it. If this step reveals new degree-1 packets, the decoding
+% continues iteratively until the original message is fully decoded.
+% Otherwise the decoder has to wait for a new packet.
+% The decoding process is sketched in listing Algorithm 2.
+% B. Notation
+% We denote the number of blocks (or input symbols) in the
+% message by N and the degree distribution by ToBeInsterted(d). When
+% convenient, we also refer to the point probabilities by pj , i.e.,
+% pj = ToBeInsterted(j). Later we will compare the performance of the optimized
+% distributions to the following reference distributions:
+% Def.1 (Uniform): pi = 1/N, i = 1, . . . , N.
+% Def.2 (Degree-1): pi = 1(i = 1).
+% Def.3 (Binomial): pi= 1
+% 2N-1
+% ToBeInserted
+% N
+% i
+% ToBeInserted
+% , i=1, . . . , N.
+% Def.4 (Soliton): p1= 1
+% N , and pi= 1
+% i(i-1), i=2, . . . , N.
+% Binomial distribution is the standard Bin(N, 1
+% 2 ) with event
+% 0 excluded. It results from including every source block
+% independently with probability 1
+% 2 , discarding an empty packet.
+% Let the random variable Zk denote the number of decoded
+% input symbols after receiving the kth packet. Initially, Z0 = 0
+% and at the end Zk = N. The random variable T denotes the
+% number of packets needed for decoding the original message,
+% T = min
+% k
+% {k : Zk = N}.
+% The earliest time when the decoding process can finish is when
+% the Nth packet arrives and thus T ToBeInserted N. Moreover, we let PN
+% denote the probability that a message consisting of N blocks
+% is successfully decoded with exactly N received packets,
+% PN = P{ZN = N} = P{T = N} .
+% \cri{"So in the paper two ways of defining a probability are presented:"}\\
+% \begin{itemize}
+%   \item The decoding process can be studied as a Markov chain
+% [8]. From the receiver’s point of view, the set of received
+% and either partially or fully decoded packets denotes a state.
+% State transition probabilities depend on the arrival probabilities
+% of specific packets, which in turn depend on the degree
+% distribution used in the encoding. The process ends when it has
+% reached the absorbing state consisting of the original blocks.
+% The state space of the Markov chain describing the decoding
+% process, however, needs only include the states that are
+% irreducible in the sense that they cannot be reduced by the
+% decoder. For instance the raw state {a, abc} is not included
+% as decoding reduces it to the state {a, bc}. This decreases the
+% number of states remarkably. Further reduction is possible by
+% observing that if a sample path of the process is modified by
+% permuting the original blocks then the resulting sample path is
+% isomorphic to the original one. Using the above reduction schemes the number of states can
+% be brought down to 12 for N=3 and to 192 for N=4. Systems
+% of this size are amenable to numerical analysis. For N=5,
+% however, even the reduced state space has 612224 states, which
+% is too much to be conveniently handled, and for N ToBeInserted 5 the task
+% is overwhelming.
+% We consider two different optimization criteria for the degree
+% distribution. A natural objective is to minimize the mean
+% number of packets needed to successfully decode the message.
+% Alternatively one may wish to maximize the probability of
+% successful decoding after reception of N packets.
+% Using the state transition matrix P we can calculate the
+% average number of sent packets needed to recover the whole
+% original file. This Markov chain has now the state where all
+% blocks are decoded as an absorbing state. In the example with
+% three blocks, using the notation presented, this state is {a, b, c}.
+% As this Markov chain is clearly finite, it can be written in the
+% following canonical form:
+% P =
+% ToBeInserted
+% Q R
+% 0 I
+% ToBeInserted
+% ,
+% where Q is the transition matrix between transient states, R
+% represents transitions from transient states to absorbing ones
+% and I is identity matrix corresponding to the absorbing states.
+% In our case, there is just one absorbing state and the identity
+% matrix I reduces to a 1x1 matrix. Now the fundamental matrix
+% M = (I - Q)-1 is well-defined with all elements positive
+% and represents all possible transition sequences in the transient
+% states without going to the absorbing one. A specific element
+% mij in M tells the mean number of visits in state j before
+% absorption when starting in state i. Using the fundamental
+% matrix, average number of steps can be calculated as follows
+% % E [T] = π0MeT = π0(I - Q)-1eT = π0A-1eT, (1)
+% % where π0 = (1 0 . . . 0) is the initial distribution vector
+% % corresponding to an empty system, eT = (1 . . . 1)T, and
+% % A = I - Q. Similarly we can calculate the probability of
+% % success PN after receiving N packets. This is given by the
+% % probability of the absorbing state after N steps,
+% % PN = π0PNπT
+% abs,
+% From this result it is easy to calculate the optimal weights
+% minimizing the mean number of steps to decode the message.
+% Similarly, using (2) one obtains an expression for P3, the
+% probability of full decoding after 3 received packets, identical
+% with (5) obtained by the approach of Section IV. Optimized
+% results for these two different objectives are listed in Table I.
+% Objective MinAvg means minimization of average number of
+% steps E [T] needed for decoding and MaxPr maximizing the
+% probability P3 of decoding in exactly three steps. Both
+% uniform and degree-1 distributions perform rather poorly, the
+% degree-1 distribution being worst. In contrast, the binomial
+% distribution performs reasonably well, next followed by the
+% soliton distribution (in fact, these distributions are similar). Also the ranking of the other
+% four distributions is the same as before. Binomial and soliton
+% distributions work reasonably well with respect to both criteria
+% (though, in relative terms, not quite as well as in the case
+% N = 3), being almost equal (again the distributions are in this
+% case very similar), while the other two are much poorer.
+%   \item When the objective of optimization is maximization of the
+% probability PN of successful decoding after reception of N
+% encoded packets, i.e. at the first instant complete decoding is
+% possible, the problem can be analyzed using another approach.
+% The central observation is that in this case the order in which the packets are received is irrelevant; whatever the order of
+% the N packets the decoding either is or is not successful
+% at the moment when all the N packets have been received.
+% The probability of success can then be found by a recursive
+% combinatorial approach as detailed below.
+% A. Recursive algorithm
+% For completeness, let us now write Pn = Pn(p1, . . . , pn).
+% In this function we allow degree distributions with a positive
+% probability for an empty packet and define implicitly p0 =
+% 1 -
+% ToBeInserted
+% n
+% i=1 pi. Obviously we have P0 = 1 and P1(p1) = p1,
+% which provide the seeds for the recursion.
+% In order to calculate Pn(p1, . . . , pn) we condition this
+% probability on n-m of the n received packets having degree
+% 1, which happens with a probability equal to the (n - m)th
+% point probability of the binomial distribution Bin(n, p1). For
+% successful decoding one must necessarily have n - m ToBeInserted 1,
+% otherwise the decoding does not get started. Further, because
+% the successful decoding after n received packets requires that
+% no packets are wasted there must be no duplicates and all the
+% n - m degree-1 packets must be distinct. This happens with
+% the probability (n - 1)!/m! nn-m-1.
+% Given the n - m distinct degree-1 packets, we have a
+% remaining decoding problem for the m other packets that
+% originally are surely at least of degree 2, but whose degrees
+% may be modified when the n-m degree-1 packets are removed
+% from the other packets in the decoding process, giving
+% B. Numerical results
+% For the cases N = 5, . . . , 8 the symbolic expressions of type
+% (5) can be relatively easily handled and optimized numerically.
+% The results are shown in Table III, where the estimates for
+% E [T] were obtained by simulations. An example of the optimal
+% degree distribution obtained using the numerical recursion for
+% somewhat greater value N = 16 is shown in Fig. 2, with
+% the optimum P16 = 0.01551. The distribution has a strikingly
+% irregular character. Same kind of irregularities do also show up
+% already for smaller values of N in Table III. It should, however,
+% be noted that the results exhibit a great degree of insensitivity
+% with respect to some features of the degree distribution. This is
+% demonstrated by the fact that the same maximal value P16 =
+% 0.01551 is obtained for instance with a distribution where only
+% the probabilities p1 = 0.1565, p2 = 0.5493, p4 = 0.2095,
+% p8 = 0.0732 and p16 = 0.0115 are non-zero.
+% In order to better understand the nature of this kind of
+% insensitivity we calculated the second derivative matrix Aij = Delta 2PN/Delta piDelta pj , i, j = 2, . . . , N at the optimum point with
+% the variable p1 eliminated by the norm condition
+% ToBeInserted
+% i pi = 1.
+% The eigenvectors and eigenvalues of A determine the principal
+% directions and curvatures in these directions. It turns out that
+% the eigenvalues constitute a rapidly decreasing sequence, with
+% the ratio of two consecutive eigenvalues being of the order of
+% 10. For instance in the case N = 3 (A is a 2 x 2 matrix) the
+% eigenvalues are Lambda 1 = -6.97 and Lambda 2 = -0.71. The P3 surface
+% is illustrated in Fig. 3, where also the principal directions
+% are shown. The function forms a ridge which is steep in one
+% direction but flat in the direction along the top of the ridge.
+% The effect is much more pronounced when N is larger. For
+% instance, for N=10 the largest and smallest eigenvalues are
+% Lambda 1=-27.3 and Lambda 9=-2.53 x 10-6 showing that the function
+% is extremely insensitive to changes in the direction of the last
+% eigenvector. In fact, when the vector representing the distribution
+% is constrained to lie on the intersection of hyperplanes
+% with normals given by a few first eigenvectors and going
+% through the optimal point, the PN has almost the optimal value
+% no matter what the location of the distribution vector is in the
+% other directions. Our experiments indicate that typically three
+% conditions of this type suffice to define a distribution which
+% performs very close to the optimum.
+% Fig. 4 shows the probability of successful decoding PN after
+% N received packets as a function of N for N = 1, . . . , 20.
+% The results have been obtained by using the optimized degree
+% distribution for each N. Also shown is the behaviour of the
+% relative overhead (E [T] - N)/N. This was obtained using
+% a degree distributions optimized not for the MinAvg criterion
+% but for the MaxPr criterion as above, and estimating E [T] by
+% simulations. As is well known, for such small values of N the
+% performance of LT codes is rather poor. The highest relative
+% overhead 44.6 % occurs at N = 9. After that point a slow
+% decline of the relative overhead starts but the codes become efficient only when N is of the order of 10000.
+% \end{itemize}
+% \cri{"This is why we then focus of the analysis of the performance for big values of N:"}\\
+% LT Decoding Drawbacks
+% In the LT decoding process, a symbol is taken off from
+% the ripple each time and the related packets are updated
+% accordingly. The process terminates when there is no more
+% symbol left in the ripple, which is said to be successful if all
+% symbols are recovered. Hence, in the process, it is important
+% not to let the symbols in the ripple run out before all symbols
+% can be recovered. Since the arrival of new symbols into the the degree distribution used in the encoding is also a crucial
+% factor to the final success of the decoding process.
+% Our further investigation on the LT decoding process reveals
+% that when LT decoding process terminates and reports a
+% failure, often the undecodable packets can be decoded to
+% recover all symbols within the packets by other means, such
+% as Gaussian elimination [10]. In other words, when viewing a
+% packet as an equation formed by combining linearly a number
+% of variables (or symbols) in GF(2), the set of available
+% equations (or packets) may give a full rank such that a
+% numerical solver (or decoder) can determine all variables (or
+% symbols). Attributing to the design of the LT decoding process,
+% the method recovers only partial but not all symbols.
+% B. Full Rank Decoding
+% Knowing that the LT decoding process terminates early due
+% to lack of symbols in the ripple, in this paper, we propose a
+% method, called full rank decoding to extend the decodability
+% of LT codes. Specifically, given a set of packets of full rank,
+% whenever the ripple is empty causing an early termination,
+% a particular symbol is borrowed and decoded through some
+% other method, and then placed into the ripple for the LT
+% decoding process to continue. This procedure is repeated until
+% the LT decoding process terminates with a success. Note that
+% in the case of full rank, any picked borrowed symbol can be
+% decoded with a suitable method to allow continuation of the
+% LT decoding process. Unlike the previous approach [8], [10]
+% where the decoding procedure completely or partially relies
+% on Gaussian elimination, our proposed decoding algorithm
+% mainly uses LT decoding to recover symbols, and triggers
+% Wiedemann algorithm when LT decoding fails in order to
+% recover a borrowed symbol, then returns back to LT decoding
+% to recover subsequent symbols.
+% We use the following criteria to decide which symbol
+% should be borrowed. Considering decoding k symbols with
+% n packets, given the above analogy between a packet and
+% a linear equation, let v1; v2; : : : ; vn denote the coefficient
+% vectors with the entries in GF(2) at the intermediate decoding
+% process when the ripple is empty. Let bj denote the index of
+% the borrowed symbol, and bj is decided by
+% bj = arg maxj (V (j)jV :=
+% Pn
+% i=1 vi) : (1)
+% The above sum operation is defined in real number field, and
+% V (j) gives the value at index j of the vector V. The basic idea
+% here is to choose the symbol that is carried by most packets.
+% Incorporating borrowed symbols into the LT decoding, our
+% proposed full rank LT decoding is shown in Algorithm 1.
+% C. Recovering the Borrowed Symbol
+% One of the critical designs in our proposed idea is the
+% recovery of a borrowed symbol. We need to seek for a suitable
+% method that can recover only a single symbol using a low
+% computational cost. Common techniques such as Gaussian
+% elimination are inadequate as they are designed to recover all present our method in the following.
+% Let M denote the coefficient matrix. M is of size n£k for
+% decoding k symbols with n packets. To ease our discussion,
+% we let n = k for the time being. The case of n > k will be
+% discussed later. The task of decoding is essentially to solve
+% Mx = y (2)
+% for x where x is the k£l vector of the symbols, y is the n£l
+% vector of received packets, l is the length of a symbol, and M
+% is defined over GF(2).
+% Rather than the entire symbol set, our decoding procedure
+% only needs to solve for a particular symbol, i.e. the borrowed
+% symbol. This allows us to use a solver that deals with solving
+% for only a single symbol with much lesser computational cost.
+% The first task is to identify a collection of row vectors fromM
+% such that the row vectors eliminates all other symbols except
+% the borrowed symbol. Let x0 be a k £ 1 vector over GF(2)
+% describes the selection of row vectors, where x0
+% j = 1 indicates
+% that the jth row vector is selected and x0
+% j = 0 indicates
+% otherwise. Let ui be a k £ 1 unit vector where the unique 1
+% locates at the index i which is also the index of the borrowed
+% symbol. We then need to solve the following
+% Mtx0 = ui (3)
+% for x0 where Mt = MT. The fact that M is of full rank
+% guarantees the existence of a solution. Finally, the inner
+% product of (x0; y) gives the borrowed symbol. We use the
+% efficient Wiedemann algorithm [11] to solve (3). The vector
+% ui is first used to generate the so-called Krylov sequence
+% ui;Mtui;M2t
+% ui; :::;Mkt
+% ui; ::: :
+% Let S be the space spanned by this sequence, where Mt  D. Non-square Case
+% In practice, it is likely that more than k packets have to
+% be received in order to ensure the complete recovery of all
+% symbols. As a result, the coefficient matrix M will be nonsquare,
+% i.e., the matrix is of size n £ k with rank equal to k
+% and n ToBeInserted k\\
+% IV. NUMERICAL RESULTS AND DISCUSSION
+% Reference [6] and Section III provide the probabilities
+% that all symbols can be successfully decoded after receiving
+% a particular number of packets for LT and FR decoding
+% algorithms respectively. Using these results, in Fig. 3, we
+% compare the expected number of packets received for both
+% algorithms. Four different set of configuration parameters are
+% used, and the number of source symbols k ranges from 30 to
+% 100. We compare with two sets of configuration parameters
+% related to LT codes where both show consistent results.
+% From Fig. 3, it can be seen that our proposed full ranking
+% decoding yields much better performance in terms of the
+% expected number of packets needed for decoding. It can also be
+% seen that the performance of our proposed algorithm is close
+% to the ideal performance (i.e. n = k). Conversely, LT codes
+% need additional packets to compensate for the imperfectness
+% of received degree distribution to avoid the decoding process
+% from terminating prematurely. We further plot the benchmark the performance of both
+% decoding schemes in Fig. 4. We develop both the decoding
+% algorithms in Matlab and use tic/toc commands to record the
+% runtime for decoding k symbols of 16 bits with 95% success
+% probability. It can be seen our FR decoding requires much
+% lower runtime for both configurations. While FR decoding
+% requires additional steps to recover the borrowed symbols, it
+% permits fewer input packets to decode which reduces the overall
+% processing time. In addition, unlike traditional Wiedemann
+% or Gaussian Elimination methods, the size of the coefficient
+% matrix keeps on shrinking with each round of LT decoding
+% passed.

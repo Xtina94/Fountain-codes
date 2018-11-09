@@ -1,0 +1,24 @@
+\section{The digital fountain}
+The digital fountain approach takes its name from the analogy with spraying water drops that are collected into a bucket. When the bucket is being filled by a fountain, we are not interested in knowing which droplets are falling into the bucket, as long as it is being filled. Once the filling part is done, the collection process ends and the content decoding will start. \cite{Lu}\\
+In tha same way, this approach injects a flow of distinct encoding packets into the network in such a way that the source data can be reconstructed entirely from $any$ subset of them having the same length, in total, as the source data.
+A straightforward implementation of a digital fountain directly uses an erasure code that takes $k$-packets source data and produces as many encoded packets as the user demand needs. Thus, using for example the Reed-Solomon erasure code in such a way that the client side decoder can recontstruct the original source data whenerver $k$ transmitted packets are received, the file is \textit{stretched} into $n$ encoding packets, with $\frac{n}{k}$ being the \textit{stretch factor} or erasure codes. This technique comes with some side effects, one of which is the decreased efficiency of encoding and decoding operations: with the standard Reed-Solomon codes, for example, the behaviour is prohibitive even for small values of $k$ and $n$. Hence, an alternative to these codes is proposed in \cite{Byers}, by using the so-called \textit{Tornado codes}. In this codes, the equations have the form $y_3 = x_2 \oplus x_7 \oplus x_9$ where $\oplus$ represents the \textit{bitwise} exclusive or and is used in place of the normal exclusive or $+$. On the other side, the decoding process of the Tornado codes uses two basic operations that are:
+\begin{itemize}
+  \item replacing the received variables with theyr values in the equations they appear in;
+  \item a simple \textit{subsitution rule};
+\end{itemize}
+Through these operations, Tornado codes avoid both the filed operations and the matrix inversion inherent in decoding Reed-Solomon codes. Furthermore, while the latter are built using a dense system of linear equations, the former are built using random \textit{sparse} equations, and this brings to a significant reduction in decoding time. The price we pay for faster coding is that $k$ packets are no longer enough to reconstruct the source data, translating into higher decoding inefficiency. In practice, however, the number of possible substitution rule applications stay minimal as far as slightly more than $k$ packets are received, and often a single arrival generates a whirlwind of subsections that permit to recover all the remaining source data packets. Hence the name of Tornado codes. We can conclude that the advantage of these codes is that they are a tradeoff between a small increase in decoding inefficiency and a significant decrease of encoding and decoding times. \cite{Byers}. \ref{tab:Tornado} highlights the main propoerties of the Tornado codes, compared to the ones of Reed-Solomon codes.
+\begin{table}
+\centering
+\caption{Properties of Tornado and Reed-Solomon codes}
+\label{tab:Tornado}
+\begin{tabular}{c|cc}
+  \firsthline
+  & Tornado & Reed-Solomon\\
+  \hline
+  Decoding inefficiency & $1+\epsilon$ required & $klP$\\
+  Encoding Times & $(k+l)ln(1/\epsilon)P$ & $klP$\\
+  Decoding Times & $(k+l)ln(1/\epsilon)P$ & $klP$\\
+  Basic Operation & XOR & Field operation \\
+  \lasthline
+\end{tabular}
+\end{table}
