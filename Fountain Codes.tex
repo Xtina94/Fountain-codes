@@ -15,6 +15,7 @@
 
 %% Mathematical packets
 %% ----------------------------------------------- %%
+\usepackage{bm}
 \usepackage{amsmath, amssymb, amsfonts, amsthm, mathtools}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -97,6 +98,8 @@
 \newacronym{bp}{BP}{Belief Propagation}
 \newacronym{fec}{FEC}{Forward Error Correction}
 \newacronym{ber}{BER}{Bit Error Rate}
+\newacronym{uep}{UEP}{Unequal Error Protection}
+\newacronym{dnc}{DNC}{Distributed Network Coding}
 
 \begin{document}
 \lipsum[1]
@@ -106,8 +109,8 @@
 \import{../}{TheLTEncoding.tex}
 \import{../}{DecodingFiniteLength.tex}
 \import{../}{SmallN.tex}
-% % \import{../}{BigN.tex}
-% \import{../}{Relay.tex}
+\import{../}{BigN.tex}
+\import{../}{Relay.tex}
 % \import{../}{BERforLT.tex}
 % % \import{../}{RaptorCodes.tex}
 % % \import{../}{Performance.tex}
