@@ -1,7 +1,7 @@
 \subsubsection{BER bounds on UEP fountain codes}
 Another interesting point of view is the one given in \cite{Yue2014}, where the main aim is not optimizing the general success probability, but instead defining an upper and lower \gls{ber} bound in the case of \gls{uep} for \gls{dnc} schemes over Rayleigh fading channels.
 
-Distributed coding is an efficient channel coding strategy that improves the transmission reliability of cooperative communication networks. In many real-life applications, source nodes require a form of unequal protection from errors, instead of the Equal counterpart, and this is as the origin of the design of a form of fountain codes called \gls{uep} fountain codes. In \cite{Yue2014}, the authors adopt the wieghted method to realize such codes, which consists in dividing the transmission data into several protection groups according to their protection requirements and assigning corresponding protection weights.
+Distributed coding is an efficient channel coding strategy that improves the transmission reliability of cooperative communication networks. In many real-life applications, however, source nodes require a form of unequal protection from errors, instead of the Equal counterpart extensively addressed in \cite{Pang2012}, and this is at the origin of the design of a form of fountain codes called \gls{uep} fountain codes. In \cite{Yue2014}, the authors adopt the wieghted method to realize such codes, which consists in dividing the transmission data into several protection groups according to their protection requirements and assigning corresponding protection weights.
 
 \paragraph{The system model}
 The system model in the paper is the following: consider a \gls{wsn} where a single destination node (the sink) communicates with $K$ source nodes through a common relay network with $N$ relay nodes. The authors also add the assumption that the $K$ source nodes belongs to $T$ source groups with different error protection requirements. The data delivery from the source node to the sink is then carried out in three phases:
@@ -18,5 +18,12 @@ With these premises we can present here the \gls{ber} bounds on the bit error pr
 \begin{align}
 \centering
   \xi_U & = \sum_{k=1}^K\sum_{k_h = max\{0,k-K_L\}}^{min\{k,K_H\}}\frac{k_H}{K_H}\binom{K_H}{k_H}\binom{K_L}{k - k_H}\\
-   &\cdot \{[\sum_{w(\mathbf{c}_H)}\mu_{w(\mathbf{c}_H)}^H\zeta(w(\mathbf{c}_H),w(\mathbf{e})) = k,w(\mathbf{e}_H) = k_H)]^Q+P_r(\mathbf{eG} \neq \mathbf{0},w(\mathbf{e} = k, w(e)) = k_H)\}
+   \cdot\biggl\{\biggl[\sum_{w(\mathbf{c}_H)}\mu_{w(\mathbf{c}_H)}^H\zeta(w(\mathbf{c}_H),&w(\mathbf{e})) = k,w(\mathbf{e}_H) = k_H)\biggr]^Q+P_r(\mathbf{eG} \neq \mathbf{0},w(\mathbf{e} = k, w(e_H)) = k_H)\biggr\}
 \end{align}
+At the same time, the same \gls{ber} performance can be lowerbounded by $\xi_L^F > max\{0,\xi_L\}$, where $\xi_L$ is given by:
+\begin{align}
+\centering
+  \xi_L & = \sum_{k_h = max\{0,1-K_L\}}^{min\{1,K_H\}}\frac{k_H}{K_H}\binom{K_H}{k_H}\binom{K_L}{1 - k_H}\\
+   \cdot\biggl\{\biggl[\sum_{w(\mathbf{c}_H)}\mu_{w(\mathbf{c}_H)}^H\zeta(w(\mathbf{c}_H),&w(\mathbf{e})) = 1,w(\mathbf{e}_H) = k_H)\biggr]^Q+P_r(\mathbf{eG} \neq \mathbf{0},w(\mathbf{e} = 1, w(e_H)) = k_H)\biggr\}
+\end{align}
+The proof of the previous results can be found in \cite{Yue2014}.
