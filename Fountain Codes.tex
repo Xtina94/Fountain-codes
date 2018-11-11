@@ -2,8 +2,8 @@
 %% ----------------------------------------------- %%
 \documentclass[12pt,a4paper,titlepage]{article}
 \usepackage[a4paper]{geometry}
-% \geometry{top=2.5cm,bottom=2.5cm,left=2.25cm,right=2.25cm,%
-% heightrounded,bindingoffset=5mm}
+\geometry{top=3cm,bottom=3cm,left=2.75cm,right=2.75cm,%
+heightrounded,bindingoffset=5mm}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 % \usepackage[light]{CormorantGaramond}
@@ -106,6 +106,8 @@
 \newacronym{hep}{HEP}{High Error Protection}
 \newacronym{lep}{LEP}{Low Error Protection}
 \newacronym{ml}{ML}{Maximum Likelyhood}
+\newacronym{bimsc}{BIMSC}{Binary Memoryless Symmetric Channel}
+\newacronym{bec}{BEC}{Binary Erasure Channel}
 
 \begin{document}
 \lipsum[1]
@@ -116,11 +118,11 @@
 \import{../}{DecodingFiniteLength.tex}
 \import{../}{SmallN.tex}
 \import{../}{BigN.tex}
-\import{../}{Relay.tex}
+% \import{../}{Relay.tex}
 \import{../}{BERforLT.tex}
 \import{../}{RaptorCodes.tex}
-% % \import{../}{Performance.tex}
-% % \import{../}{BERforRaptor.tex}
+\import{../}{Performance.tex}
+\import{../}{BERforRaptor.tex}
 % % \import{../}{ReedSolomon.tex}
 
 \bibliographystyle{ieeetr}
