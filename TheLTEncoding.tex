@@ -1,4 +1,5 @@
 \section{The LT-codes}
+\label{sec:lt}
 A further improvement in the field of erasure codes is given by the important calss of LT codes, ratless codes introduced and described by Luby in \cite{Luby}. LT codes are the first realization of universal erasure codes, meaning that the codes symbol length can be arbitrary. Moreover, these codes are rateless, which means that the number of encoding symbols that can be generated from the data is potentially limitless.
 
 Comparing LT codes to the preceding Tornado codes, it can be seen that their analysis is slightly different: in particular the Tornado codes analysis can only be applied to graphs with constant maximum degree, while LT codes graphs are of logarithmic density. Moreover, while for the Tornado codes the reception overhead is at least a constant fraction of the data length, for the LT codes it is an asymptotically fading fraction of the data length, even though with the tradeoff of lightly higher asymptotic encoding and decoding times. Another considerable advantage of these codes is that, once $k$ and $n$ have been chosen, the Tornado encoder generates $n$ symbols and cannot produce others on the fly like LT codes do. Finally, there is a notable difference in the degree distribution of input and encoding symbols: for Tornado codes the degree distribution in input symbols is similar to the so-called \textit{Soliton distribution}, while the degree distribution of encoding symbols can be approxhimated by the Poisson distribution. This thing, though, cannot be applied to the LT codes, since the Soliton distribution cannot be the resulting degree distribution on input symbols when encoding symbols are generated independently, regardless of the distribution of neighbors of encoding symbols.
@@ -11,7 +12,6 @@ In \cite{Luby} Luby gives a complete explanation of the encoding and the decodin
   \item Choose uniformly at random $d$ distinct input symbols which can be neighbors of the encoding symbol;
   \item Perform the exclusive-or of the $d$ neighbors to obtain the value of the encoding symbol;
 \end{itemize}
-\note{In addition to this, it should be kept in mind that the decoder needs know the set and degree of neighbors of each encoding symbol in order to recover the original input symbol, and for this there are several ways to communicate this to it.}\cri{metterlo?}
 
 There are several degree distributions that can be used for our encoding symbols and the choice of each one comes with different performance in terms of coding times, efficiency and \gls{ber}, which we will see further on in this work. In general the most important ones are:
 \begin{itemize}

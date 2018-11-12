@@ -27,3 +27,17 @@ At the same time, the same \gls{ber} performance can be lowerbounded by $\xi_L^F
    \cdot\biggl\{\biggl[\sum_{w(\mathbf{c}_H)}\mu_{w(\mathbf{c}_H)}^H\zeta(w(\mathbf{c}_H),&w(\mathbf{e})) = 1,w(\mathbf{e}_H) = k_H)\biggr]^Q+P_r(\mathbf{eG} \neq \mathbf{0},w(\mathbf{e} = 1, w(e_H)) = k_H)\biggr\}
 \end{align}
 The proof of the previous results can be found in \cite{Yue2014}.
+
+\paragraph{Results}
+\autoref{fig:berLT} (a) and (b) show the upper and lower \gls{ber} bounds at an average $E_s/N_0 = 0.9dB$: as it is evident, the upper and lower bounds become asymptotically tight as the expanding coefficient $\eta$ grows. Moreover, the \gls{ber} performance of the \gls{hep} group is better, compared to the Equal protection design, while the \gls{lep} group is only slightly worse.\cite{Yue2014}
+\begin{figure}
+\centering
+\begin{minipage}[c]{0.47\textwidth}
+  \includegraphics[width = 0.85\textwidth]{img/bounds_14a}
+\end{minipage}
+\begin{minipage}[c]{0.47\textwidth}
+  \includegraphics[width = 0.8\textwidth]{img/bounds_14b}
+\end{minipage}
+\caption{\footnotesize{BER performance bounds comparison of the \gls{uep} \gls{dnc} scheme based on fountain codes with \gls{ml} decoding over Rayleigh fading channels with $T=2$ and $K=100$. The left figure is for \gls{hep} group ($\alpha_H = 0.1$), the right one is for \gls{lep} group ($\alpha_L = 0.9$) Source \cite{Yue2014}}}
+\label{fig:berLT}
+\end{figure}

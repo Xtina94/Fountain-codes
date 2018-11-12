@@ -64,8 +64,10 @@ heightrounded,bindingoffset=5mm}
 %% ----------------------------------------------- %%
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{sidecap}
+\sidecaptionvpos{figure}{c}
 %\captionsetup[figure]{labelfont={color=Turquoise}}
-\graphicspath{{./figures/}}
+\graphicspath{{./img/}}
 
 %% Setting equations and enumerations style
 %% ----------------------------------------------- %%
@@ -90,7 +92,7 @@ heightrounded,bindingoffset=5mm}
 \renewcommand{\eqref}[1]{\textup{\reftagform@{\ref{#1}}}}
 \makeatother
 \usepackage{hyperref}
-\hypersetup{colorlinks = true, linkcolor  = black}
+\hypersetup{colorlinks = true, allcolors = black}
 
 %% Glossary
 %% ----------------------------------------------- %%
@@ -110,7 +112,8 @@ heightrounded,bindingoffset=5mm}
 \newacronym{bec}{BEC}{Binary Erasure Channel}
 
 \begin{document}
-\lipsum[1]
+% Summary
+The work presented here is a brief overview of some of the latest researches on fountain codes and their variants and how they progressively presented improvements over several points of view. The work is articulated like this: \autoref{sec:intro} is a brief introduction on the main scenarios problems to takle and the solutions preceeding fountain codes; later, in \autoref{sec:tornado} a description of the digital fountain approach is depicted, with stress on the Tornado codes; \autoref{sec:lt} goes deep into the concept of LT-codes, presenting their features and their strengh in terms of encoding probability distributions and \gls{ber} performance; finally, in \autoref{sec:raptor}, we give a description of the so-called Raptor codes, briefly analyzing their \gls{ber} behavior and comparing it to the one of LT-codes.
 
 \import{../}{Introduction.tex}
 \import{../}{TheDigitalFountain.tex}
@@ -123,7 +126,7 @@ heightrounded,bindingoffset=5mm}
 \import{../}{RaptorCodes.tex}
 \import{../}{Performance.tex}
 \import{../}{BERforRaptor.tex}
-% % \import{../}{ReedSolomon.tex}
+\import{../}{Conclusions.tex}
 
 \bibliographystyle{ieeetr}
 \bibliography{MyBib}
