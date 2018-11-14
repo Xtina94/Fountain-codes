@@ -1,16 +1,16 @@
 \section{The LT-codes}
 \label{sec:lt}
-A further improvement in the field of erasure codes is given by the important calss of LT codes, ratless codes introduced and described by Luby in \cite{Luby}. LT codes are the first realization of universal erasure codes, meaning that the codes symbol length can be arbitrary. Moreover, these codes are rateless, which means that the number of encoding symbols that can be generated from the data is potentially limitless.
+A further improvement in the field of digital fountain codes is given by the important calss of LT codes, ratless codes introduced and described by Luby in \cite{Luby}. LT codes are the first realization of universal erasure codes, meaning that the codes symbol length can be arbitrary. Moreover, these codes are rateless, which means that the number of encoding symbols that can be generated from the data is potentially limitless.
 
-Comparing LT codes to the preceding Tornado codes, it can be seen that their analysis is slightly different: in particular the Tornado codes analysis can only be applied to graphs with constant maximum degree, while LT codes graphs are of logarithmic density. Moreover, while for the Tornado codes the reception overhead is at least a constant fraction of the data length, for the LT codes it is an asymptotically fading fraction of the data length, even though with the tradeoff of lightly higher asymptotic encoding and decoding times. Another considerable advantage of these codes is that, once $k$ and $n$ have been chosen, the Tornado encoder generates $n$ symbols and cannot produce others on the fly like LT codes do. Finally, there is a notable difference in the degree distribution of input and encoding symbols: for Tornado codes the degree distribution in input symbols is similar to the so-called \textit{Soliton distribution}, while the degree distribution of encoding symbols can be approxhimated by the Poisson distribution. This thing, though, cannot be applied to the LT codes, since the Soliton distribution cannot be the resulting degree distribution on input symbols when encoding symbols are generated independently, regardless of the distribution of neighbors of encoding symbols.
+Comparing LT codes to the preceding Tornado codes, it can be seen that their analysis is slightly different: in particular the Tornado codes analysis can only be applied to graphs with constant maximum degree, while LT codes graphs are of logarithmic density. Moreover, while for the Tornado codes the reception overhead is at least a constant fraction of the data length, for the LT codes it is an asymptotically fading fraction of the data length, yet with the tradeoff of slightly higher asymptotic encoding and decoding times. Another considerable advantage of these codes is that, once $k$ and $n$ have been chosen, the Tornado encoder generates $n$ symbols and cannot produce others on the fly like LT codes do. Finally, there is a notable difference in the degree distribution of input and encoding symbols: for Tornado codes the degree distribution on input symbols is similar to the so-called \textit{Soliton distribution}, while the degree distribution of encoding symbols can be approxhimated by the Poisson distribution. This thing, though, cannot be applied to the LT codes, since the Soliton distribution cannot be the resulting degree distribution on input symbols when encoding symbols are generated independently, regardless of the distribution of neighbors of encoding symbols.
 \cite{Luby}
 
 \subsection{The encoding process}
-In \cite{Luby} Luby gives a complete explanation of the encoding and the decoding process, and the former can be here briefly described by the steps:
+In \cite{Luby} Luby gives a complete explanation of the encoding and the decoding process. The former can be here briefly described by the following steps:
 \begin{itemize}
   \item From a degree distribution, randomly choose the degree $d$ of the encoding symbol;
-  \item Choose uniformly at random $d$ distinct input symbols which can be neighbors of the encoding symbol;
-  \item Perform the exclusive-or of the $d$ neighbors to obtain the value of the encoding symbol;
+  \item Choose uniformly at random $d$ distinct input symbols that can be neighbors of the encoding symbol;
+  \item Finally, perform the exclusive-or of the $d$ neighbors to obtain the value of the encoding symbol;
 \end{itemize}
 
 There are several degree distributions that can be used for our encoding symbols and the choice of each one comes with different performance in terms of coding times, efficiency and \gls{ber}, which we will see further on in this work. In general the most important ones are:
@@ -19,10 +19,10 @@ There are several degree distributions that can be used for our encoding symbols
   \item The \textit{Ideal Soliton Distribution}: $\rho(1) = 1/k$ and $\forall i = 2,\dots,k$ then $\rho(i) = 1/i(i-1)$;
   \item The \textit{Robust Soliton Distribution}:
   \begin{itemize}
-    \item $\beta  = sum_{i=1}^{k}\rho(i)+\tau(i)$
-    \item $\forall i = 1,\dots,k$ then $\mu(i) = (\rho(i)+\tau(i))/\beta$
+    \item $\beta  = \sum_{i=1}^{k}\rho(i)+\tau(i)$
+    \item $\forall i = 1,\dots,k$ then $\mu(i) = \frac{(\rho(i)+\tau(i))}{\beta}$
   \end{itemize}
-  with, for an $R = c\cdot ln(k/\delta)\sqrt k$ for some suitable constant $c > 0$, the quantity $\tau(i)$ being:\\
+  with the quantity $\tau(i)$ being:\\
   \[
   \tau(i) =
   \begin{cases}
@@ -31,4 +31,5 @@ There are several degree distributions that can be used for our encoding symbols
     0 \qquad \text{for } i = k/R +1, \dots,k
   \end{cases}
   \]
+  for $R = c\cdot ln(k/\delta)\sqrt k$ for some suitable constant $c > 0$
 \end{itemize}

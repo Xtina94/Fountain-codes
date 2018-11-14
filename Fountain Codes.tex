@@ -1,6 +1,6 @@
 %% Document type settings
 %% ----------------------------------------------- %%
-\documentclass[12pt,a4paper,titlepage]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage[a4paper]{geometry}
 \geometry{top=3cm,bottom=3cm,left=2.75cm,right=2.75cm,%
 heightrounded,bindingoffset=5mm}
@@ -12,6 +12,8 @@ heightrounded,bindingoffset=5mm}
 \linespread{1.5}
 \usepackage{microtype} %improves the spacing between words and letters
 \usepackage{lipsum}
+\newcommand{\email}[1]{\texttt{#1}}
+\usepackage{titling}
 
 %% Mathematical packets
 %% ----------------------------------------------- %%
@@ -112,8 +114,18 @@ heightrounded,bindingoffset=5mm}
 \newacronym{bec}{BEC}{Binary Erasure Channel}
 
 \begin{document}
+\begin{titlingpage}
+\title{Performance overview of decoding approaches for Digital Fountain Codes}
+\author{Critina Gava\\
+Department of Information Engineering, University of Padova\\
+\email{cristina.gava@studenti.unipd.it}}
+\setlength{\droptitle}{3pt} % lower the title
+\maketitle
+\begin{abstract}
 % Summary
-The work presented here is a brief overview of some of the latest researches on fountain codes and their variants and how they progressively presented improvements over several points of view. The work is articulated like this: \autoref{sec:intro} is a brief introduction on the main scenarios problems to takle and the solutions preceeding fountain codes; later, in \autoref{sec:tornado} a description of the digital fountain approach is depicted, with stress on the Tornado codes; \autoref{sec:lt} goes deep into the concept of LT-codes, presenting their features and their strengh in terms of encoding probability distributions and \gls{ber} performance; finally, in \autoref{sec:raptor}, we give a description of the so-called Raptor codes, briefly analyzing their \gls{ber} behavior and comparing it to the one of LT-codes.
+The work presented here is a brief overview of some of the latest researches on fountain codes and their variants and how they progressively presented improvements over several points of view. The work is articulated like this: \autoref{sec:intro} is a brief introduction on the main scenarios problems to takle and on the solutions preceeding fountain codes; later, in \autoref{sec:tornado} a description of the digital fountain approach is depicted, with stress on the Tornado codes; \autoref{sec:lt} goes deep into the concept of LT-codes, presenting their features and their strengh in terms of encoding probability distributions and \gls{ber} performance; finally, in \autoref{sec:raptor}, we give a description of the so-called Raptor codes, briefly analyzing their \gls{ber} behavior and comparing it to the one of LT-codes.
+\end{abstract}
+\end{titlingpage}
 
 \import{../}{Introduction.tex}
 \import{../}{TheDigitalFountain.tex}
