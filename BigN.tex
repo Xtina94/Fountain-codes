@@ -1,17 +1,17 @@
-\subsubsection{Optimal decoding algorithm for high values of k}
-The approach explained in \cite{Lu} is slightly different and is based also on the assumption, showed in \cite{Shokrollahi2006}, that LT codes perform very well for big values of $k$. In this way the authors underline the difference of their approach form the work of Hyyt\"a \textit{et al.} presented in the previous paragraph, since those methods already appeared to be not scalable and being able only to handle symbols $k \leq 10$.
+\subsubsection{Optimal decoding algorithm for high values of $N$}
+The approach explained in \cite{Lu} is slightly different and is based also on the assumption, showed in \cite{Shokrollahi2006}, that LT codes perform very well for big values of $N$. In this way the authors underline the difference of their approach from the work of Hyyt\"a \textit{et al.} presented in the previous paragraph, since those methods already appeared to be not scalable and being able only to handle symbols $N \leq 10$.
 
-In the LT decoding process, at each round a symbol is removed from the ripple and the related packets are updated accordingly. The process terminates succesfully when there is no more symbol left in the ripple and all symbols are recovered. Hence it is important not to let ripple size become 0 before all symbols are recovered. In this process the degree distribution plays a big role, since the arrival of new symbols in the ripple also depends in it.The algorithm proposed by Lu \textit{et al.} in \cite{Lu}, called \textit{full rank decoding}, is intended to extend de decodability of LT codes, preventing them from terminating prematurely. To accomplish that, whenever the ripple is empty and would cause an early termination, the method \textit{borrows} a particular symbol, decodes it through some other method (in particular $Wiedeman$ algorithm) and places it in the ripple for the process to continue.
+In the LT decoding process, at each round a symbol is removed from the ripple and the related packets are updated accordingly. The process terminates succesfully when there is no more symbol left in the ripple and all symbols are recovered. Hence it is important not to let the ripple size become $0$ before all symbols are recovered. In this process the degree distribution plays a big role, since the arrival of new symbols in the ripple also depends on it. The algorithm proposed by Lu \textit{et al.} in \cite{Lu}, called \textit{full rank decoding}, is intended to extend de decodability of LT codes, preventing them from terminating prematurely. To accomplish that, whenever the ripple is empty and would cause an early termination, the method \textit{borrows} a particular symbol, decodes it through some other method (in particular $Wiedeman$ algorithm) and places it in the ripple for the process to continue.
 
-The criteria the authors use to choose the right symbol to $borrow$ is a maximization problem described by:
+The criterion the authors use to choose the right symbol to $borrow$ is a maximization problem described by:
 \begin{equation}
-  b_j = argmax_j (V(j)|\mathbf{V} := \sum_{i=1}^{n}\mathbf{v_i})
+  b_j = argmax_j (V(j)|\mathbf{V} := \sum_{i=1}^{N}\mathbf{v_i})
 \end{equation}
 with the used quantities representing:
 \begin{itemize}
   \item $j$ the index of the borrowed symbol $b_j$;
-  \item $\mathbf{v_1},\mathbf{v_2},\dots,\mathbf{v_n}$ the coefficients vectors in the linear equations representing the encoding symbols;
+  \item $\mathbf{v_1},\mathbf{v_2},\dots,\mathbf{v_N}$ the coefficients vectors in the linear equations representing the encoding symbols;
   \item $V(j)$ the value at index $j$ of the vector $\mathbf{V}$;
 \end{itemize}
 
-The results obtained in \cite{Lu} show improved performance under the analysis of the expected number of packets needed for decoding, as well as the fact that the performance of the method is close to the ideal one. All of this resulting in in an overall lower number of packets needed to recover all the symbols and a lower runtime.
+The results obtained in \cite{Lu} show improved performance under the analysis of the expected number of packets needed for decoding, as well as the fact that the performance of the method is close to the ideal one. All of this resulting in an overall lower runtime and lower number of packets needed to recover all the symbols.
