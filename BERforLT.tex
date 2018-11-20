@@ -17,19 +17,19 @@ Finally, in the model only two main protection level groups have been defined  (
 With these premises we can present here the \gls{ber} bounds on the bit error probability for the \gls{hep} group, while the bounds for the \gls{lep} group can be easily obtained by simple switch of the terms $K_H$ and $K_L$ and substitution of the other parameters of the protection group. Considering a \gls{uep} \gls{dnc} based on fountain codes with degree distribution on \gls{hep} $\mu_{w(ch)^H}$, $K_H$, $K_L$, number of data packets collected $Q$, the error sequence $\mathbf{e}$, the $K\times Q$ matrix $\mathbf{G}$ and Hamming weight $w(\cdot)$, then the \gls{ber} performance for the protection group \gls{hep} with \gls{ml} decoding over Rayleigh fading channels can be upper bounded by $\xi_U^F < min\{1,\xi_U\}$, where $\xi_U$ is given by:
 \begin{align}
 \centering
-  \xi_U & = \sum_{k=1}^K\sum_{k_h = max\{0,k-K_L\}}^{min\{k,K_H\}}\frac{k_H}{K_H}\binom{K_H}{k_H}\binom{K_L}{k - k_H}\\
+  \xi_U & = \sum_{k=1}^K\sum_{k_h = \max\{0,k-K_L\}}^{\min\{k,K_H\}}\frac{k_H}{K_H}\binom{K_H}{k_H}\binom{K_L}{k - k_H}\\
    \cdot\biggl\{\biggl[\sum_{w(\mathbf{c}_H)}\mu_{w(\mathbf{c}_H)}^H\zeta(w(\mathbf{c}_H),&w(\mathbf{e})) = k,w(\mathbf{e}_H) = k_H)\biggr]^Q+P_r(\mathbf{eG} \neq \mathbf{0},w(\mathbf{e} = k, w(e_H)) = k_H)\biggr\}
 \end{align}
-At the same time, the same \gls{ber} performance can be lowerbounded by $\xi_L^F > max\{0,\xi_L\}$, where $\xi_L$ is given by:
+At the same time, the same \gls{ber} performance can be lowerbounded by $\xi_L^F > \max\{0,\xi_L\}$, where $\xi_L$ is given by:
 \begin{align}
 \centering
-  \xi_L & = \sum_{k_h = max\{0,1-K_L\}}^{min\{1,K_H\}}\frac{k_H}{K_H}\binom{K_H}{k_H}\binom{K_L}{1 - k_H}\\
+  \xi_L & = \sum_{k_h = \max\{0,1-K_L\}}^{\min\{1,K_H\}}\frac{k_H}{K_H}\binom{K_H}{k_H}\binom{K_L}{1 - k_H}\\
    \cdot\biggl\{\biggl[\sum_{w(\mathbf{c}_H)}\mu_{w(\mathbf{c}_H)}^H\zeta(w(\mathbf{c}_H),&w(\mathbf{e})) = 1,w(\mathbf{e}_H) = k_H)\biggr]^Q+P_r(\mathbf{eG} \neq \mathbf{0},w(\mathbf{e} = 1, w(e_H)) = k_H)\biggr\}
 \end{align}
 The proof of the previous results can be found in \cite{Yue2014}.
 
 \paragraph{Results}
-\autoref{fig:berLT} (a) and (b) show the upper and lower \gls{ber} bounds at an average $E_s/N_0 = 0.9$ dB: as it is evident, the upper and lower bounds become asymptotically tight as the packet overheead, here defined as \textit{expanding coefficient}, $\eta$ grows. Moreover, the \gls{ber} performance of the \gls{hep} group is better, compared to the Equal protection design, while the \gls{lep} group is only slightly worse \cite{Yue2014}.
+\autoref{fig:berLT} (a) and (b) show the upper and lower \gls{ber} bounds at an average $E_s/N_0 = 0.9$ dB: as it is evident, the upper and lower bounds become asymptotically tight as the packet overhead, here defined as \textit{expanding coefficient}, $\eta$ grows. Moreover, the \gls{ber} performance of the \gls{hep} group is better, compared to the Equal protection design, while the \gls{lep} group is only slightly worse \cite{Yue2014}.
 \begin{figure}
 \centering
 \begin{minipage}[c]{0.47\textwidth}
